@@ -1,0 +1,23 @@
+// If you do not specify this, it will assume proto 2.
+syntax = "proto3";
+
+package example; //All the auto generated stubs will end up in example
+option java_package = "com.example.service";
+option java_multiple_files = true;
+
+// Defines the service class
+service EmployeeService {
+  // Defines an rpc method with its request and response data structures (aka messages)
+  rpc getEmployee(EmployeeRequest) returns (EmployeeResponse);
+}
+
+message EmployeeRequest {
+  int64 id = 1;
+}
+
+message EmployeeResponse {
+  int64 id = 1; // the number is used as a tag to identify the field in the binary message in HTTP 2
+  string username = 2;
+  string name = 3;
+  string designation = 4;
+}

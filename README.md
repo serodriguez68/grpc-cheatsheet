@@ -92,9 +92,11 @@ Objective-C.
 
 ## High-level steps to develop a gRPC service
 1. Write your service definition using protobuffs (or any of the
-   supported IDLs).
-2. Generate the stubs from that file in the programming language that
-   you want for both the client and the server.
+   supported IDLs) in a `.proto` file.
+2. Use the protoc compiler to transform the `.proto` specification into
+   auto-generated classes and client / server stubs written in your
+   target programming language. You will need a `protoc-gen-grpc` plugin
+   for you target programming languages to do this.
 3. Implement the server methods enforced by the stubs and run a gRPC
    service in the language you chose. (e.g. Java)
 4. Write your client with using the generated client stubs for the
