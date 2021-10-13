@@ -14,13 +14,13 @@ repositories {
     maven("https://plugins.gradle.org/m2/")
 }
 
-sourceSets{
-    create("sample"){
-        proto {
-            srcDir("src/sample/protobuf")
-        }
-    }
-}
+// sourceSets{
+//     create("sample"){
+//         proto {
+//             srcDir("src/sample/protobuf")
+//         }
+//     }
+// }
 
 dependencies {
     compile("com.google.protobuf:protobuf-java:3.6.1")
@@ -33,16 +33,12 @@ dependencies {
     }
     // Extra proto source files besides the ones residing under
     // "src/main".
-    protobuf(files("lib/protos.tar.gz"))
-    protobuf(files("ext/"))
-
-    // Adding dependency for configuration from custom sourceSet
-    "sampleProtobuf"(files("ext/"))
+    // protobuf(files("ext/"))
 
     testCompile("junit:junit:4.12")
     // Extra proto source files for test besides the ones residing under
     // "src/test".
-    testProtobuf(files("lib/protos-test.tar.gz"))
+    // testProtobuf(files("lib/protos-test.tar.gz"))
 }
 
 protobuf {

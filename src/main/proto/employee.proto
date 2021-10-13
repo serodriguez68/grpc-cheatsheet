@@ -1,8 +1,13 @@
 // If you do not specify this, it will assume proto 2.
 syntax = "proto3";
 
-package example; //All the auto generated stubs will end up in example
-option java_package = "com.example.service";
+// All the auto generated stubs will end up in a package called "employees".
+// Packages are used to avoid naming conflicts across multiple projects
+// The package option is available for all target programming languages
+package employees;
+option java_package = "com.sergior.employees"; // Similar as above but finer grained control for Java targets
+
+// Tells the compiler to generate each part of the proto (service, request, response) in a different file.
 option java_multiple_files = true;
 
 // Defines the service class

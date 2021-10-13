@@ -90,7 +90,7 @@ generate client and server stubs out of the same protobuff spec for
 multiple languages: C, C#, Go, Java, Kotlin, Dart, Python, Ruby and
 Objective-C.
 
-## High-level steps to develop a gRPC service
+# High-level steps to develop a gRPC service
 1. Write your service definition using protobuffs (or any of the
    supported IDLs) in a `.proto` file.
 2. Use the protoc compiler to transform the `.proto` specification into
@@ -101,3 +101,29 @@ Objective-C.
    service in the language you chose. (e.g. Java)
 4. Write your client with using the generated client stubs for the
    programming language you want (e.g. Go).
+
+
+## Step 1: Write the protobuff
+
+See [employee.proto](./src/main/proto/employee.proto) for a commented
+example on how to do this.
+
+## Step 2: Compile the protos to the target language
+
+Run `./gradlew clean build`
+
+This sample project has been configured to use Gradle to compile the
+protos as part of the build process. The auto-generated stubs and
+message classes can be located inside the `./build` folder.
+
+Some things to note:
+- The package strucutre inside the `/build` directory follows the
+  `package` and `java_package` directives in the proto files.
+- `EmployeeServiceGrpc` is a generated file that contains both the
+  client and the server stubs to be used.
+  - It contains methods that allow clients to generate client stubs
+    capable of doing either synchronous or asynchronous requests to the
+    service.
+- `EmployeeRequest` and `EmployeeResponse` are the generated classes
+  that will represent these messages in Java.
+- All other classes in the folder are auxiliary.
