@@ -117,7 +117,7 @@ protos as part of the build process. The auto-generated stubs and
 message classes can be located inside the `./build` folder.
 
 Some things to note:
-- The package strucutre inside the `/build` directory follows the
+- The package structure inside the `/build` directory follows the
   `package` and `java_package` directives in the proto files.
 - `EmployeeServiceGrpc` is a generated file that contains both the
   client and the server stubs to be used.
@@ -127,3 +127,25 @@ Some things to note:
 - `EmployeeRequest` and `EmployeeResponse` are the generated classes
   that will represent these messages in Java.
 - All other classes in the folder are auxiliary.
+
+
+# Other topics
+## Metadata
+Metadata is additional information that gRPC sends between the client
+and the server. It can be stuff like authentication details,
+acknowledgments, etc.
+
+Metadata is exchanged at different points of the request response cycle
+and usually has the form of key value pairs. The keys are strings and
+the values can be strings or binary data.
+
+You can get access to the metadata if you need to.
+
+## Channels
+A channel represents the connection endpoint with the service. A gRPC
+client opens a connection to a gRPC server at a particular address and
+port.
+
+Channels have states like "connected" or "idle". You can alter the
+default behaviour of a channel with arguments and read the status of a
+channel programmatically if you need to.
