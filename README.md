@@ -130,21 +130,46 @@ Some things to note:
 
 
 # Other topics
+
+## Types of gRPC calls
+gRPC supports both blocking and async calls. In addition to that there
+are 4 types of gRPC calls. Each is useful in certain use cases:
+
+- **Unary RPC**: the channel gets setup, client makes single request,
+  server makes single response.
+  - This is the basic HTTP request/response model.
+- **Client streaming RPC call**: the channel gets setup, the client
+  sends a stream of requests ended by an end of stream marker, meanwhile
+  the server processes the stream, when the server sees the end of
+  stream marker it responds with a SINGLE response.
+  - This is used when a client wants to send big amounts of data like
+    uploading a big file.
+- **Server streaming RPC**: the channel gets setup, the client sends a
+  single request, server sends a stream of responses marking the end
+  with the trailing metadata.
+  - For example streaming a movie.
+- **Bidirectional Streaming RPC**: both clients and server can send and
+  receive streams of data simultaneously.
+  - An example of this would be incremental search of products as user
+    is typing, or a chat application with a persistent connection.
+
 ## Metadata
 Metadata is additional information that gRPC sends between the client
 and the server. It can be stuff like authentication details,
 acknowledgments, etc.
 
-Metadata is exchanged at different points of the request response cycle
-and usually has the form of key value pairs. The keys are strings and
-the values can be strings or binary data.
+Metadata is exchanged at different points of the request response cycle.
+For example, authentication metadata is exchange at the very beginning
+during the channel setup phase.
 
-You can get access to the metadata if you need to.
+Metadata usually has the form of key value pairs. The keys are strings
+and the values can be strings or binary data. You can get access to the
+metadata if you need to.
 
 ## Channels
-A channel represents the connection endpoint with the service. A gRPC
-client opens a connection to a gRPC server at a particular address and
-port.
+A channel represents the HTTP2 connection endpoint with the server. A
+gRPC client opens a connection to a gRPC server at a particular address
+and port.
 
 Channels have states like "connected" or "idle". You can alter the
 default behaviour of a channel with arguments and read the status of a
